@@ -3,23 +3,50 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Notes Manager</title>
+	<script src="NotesStorage.js"></script>
 	<script>
+
+
 	(function(){
+		var storage = new NotesStorage();
 		window.addEventListener("DOMContentLoaded",initialize);
 		var txtNote,
 			ulNotes;
+		
+		window.addEventListener("storage",function(storageEvt){
+			if (!storageEvt.oldValue && storageEvt.newValue){
+				var newNote = {id : storageEvt.key, note : storageEvt.newValue};
+				addNoteToList(newNote);
+			}
+		});
+
 		function initialize(){
 			document.getElementById("btnAddNote").addEventListener("click",onBtnAddNoteClick);
 			txtNote = document.getElementById("txtNote");
 			ulNotes = document.getElementById("ulNotes");
+			loadNotesFromStorage();
 		}
+
+		function loadNotesFromStorage(){
+			var notes = storage.getAllNotes();
+			for(var i=0;i<notes.length;i++){
+				addNoteToList(notes[i]);
+			}
+		}
+		
 		function onBtnAddNoteClick(){	
-			var newNote = document.createElement("li");
-			newNote.innerHTML = txtNote.value;
-			ulNotes.appendChild(newNote);
-			var newNoteId = new Date().getTime().toString();
-			window.localStorage.setItem(newNoteId,txtNote.value);
+			
+			var note = txtNote.value;
+			var newNote = storage.addNote(note);
+			addNoteToList(newNote);
 		}
+
+		function addNoteToList(note){
+			var newNote = document.createElement("li");
+			newNote.innerHTML = note.note;
+			ulNotes.appendChild(newNote);
+		}
+		
 	}());
 	</script>
 </head>
@@ -28,6 +55,8 @@
 	<span>Note :</span>
 	<input type="text" name="" id="txtNote">
 	<input type="button" value="Add Note" id="btnAddNote">
+	<span>Node Index :</span>
+	<input type="text" name="" id="txtNoteIndex"><input type="button" value="Remove" id="btnRemove">
 	<ul id="ulNotes">
 		
 	</ul>
