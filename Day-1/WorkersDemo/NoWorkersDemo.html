@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>No Workers Demo</title>
+	<script>
+	(function(window,document){
+		window.addEventListener("DOMContentLoaded",initialize);
+		var btnDoWork,
+			divMessage;
+
+		function initialize(){
+			btnDoWork = document.getElementById("btnDoWork");
+			divMessage = document.getElementById("divMessage");
+			btnDoWork.addEventListener("click",onBtnDoWorkClick);
+		}
+		function onBtnDoWorkClick(){
+			displayMessage("Work started!!!");
+			doWork();
+			displayMessage("Work completed!!!");
+		}
+		function displayMessage(msg){
+			divMessage.innerHTML += msg + "<br/>";
+		}
+		function doWork(){
+			for(var i=0;i<100000;i++)
+				for(var k=0;k<1000;k++)
+					for(var j=0;j<100;j++)
+					{}
+		}
+	}(window,document,undefined));
+	</script>
+</head>
+<body>
+	<input type="text" name="" id="">
+	<input type="button" value="Do Work" id="btnDoWork">
+	<div id="divMessage"></div>
+</body>
+</html>
