@@ -16,17 +16,32 @@
 		}
 		function onBtnDoWorkClick(){
 			displayMessage("Work started!!!");
-			doWork();
-			displayMessage("Work completed!!!");
+			setTimeout(function(){
+				doWork(function(){
+					displayMessage("Work completed!!!");	
+				});
+			},1);
+			
 		}
 		function displayMessage(msg){
 			divMessage.innerHTML += msg + "<br/>";
 		}
-		function doWork(){
-			for(var i=0;i<100000;i++)
-				for(var k=0;k<1000;k++)
-					for(var j=0;j<100;j++)
-					{}
+		function doWork(onCompleteCallback){
+			var _onCompleteCallback = onCompleteCallback;
+			var iterCount = 100000/100;
+			var currentIter = 0;
+			(function(){
+				currentIter++;
+				for(var i=0;i<100;i++)
+					for(var k=0;k<1000;k++)
+						for(var j=0;j<100;j++)
+						{}
+				if (currentIter < iterCount){
+					setTimeout(arguments.callee,1);
+				} else {
+					_onCompleteCallback();
+				}
+			})();
 		}
 	}(window,document,undefined));
 	</script>
