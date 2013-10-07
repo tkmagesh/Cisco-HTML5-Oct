@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Notes Manager</title>
+	<script>
+	(function(){
+		window.addEventListener("DOMContentLoaded",initialize);
+		var txtNote,
+			ulNotes;
+		function initialize(){
+			document.getElementById("btnAddNote").addEventListener("click",onBtnAddNoteClick);
+			txtNote = document.getElementById("txtNote");
+			ulNotes = document.getElementById("ulNotes");
+		}
+		function onBtnAddNoteClick(){	
+			var newNote = document.createElement("li");
+			newNote.innerHTML = txtNote.value;
+			ulNotes.appendChild(newNote);
+		}
+	}());
+	</script>
+</head>
+<body>
+	<h1>Notes Manager</h1>
+	<span>Note :</span>
+	<input type="text" name="" id="txtNote">
+	<input type="button" value="Add Note" id="btnAddNote">
+	<ul id="ulNotes">
+		
+	</ul>
+</body>
+</html>
