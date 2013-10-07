@@ -17,6 +17,8 @@
 			var newNote = document.createElement("li");
 			newNote.innerHTML = txtNote.value;
 			ulNotes.appendChild(newNote);
+			var newNoteId = new Date().getTime().toString();
+			window.localStorage.setItem(newNoteId,txtNote.value);
 		}
 	}());
 	</script>
