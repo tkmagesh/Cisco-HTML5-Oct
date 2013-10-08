@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Chat Client</title>
+	<script>
+	(function(window,document){
+		var socket;
+		window.addEventListener("DOMContentLoaded",initialize);
+		function initialize(){
+			socket = new WebSocket("ws://localhost:9090/SocketServer");
+			socket.addEventListener("open",onSocketOpen);
+			socket.addEventListener("close",onSocketClose);
+			socket.addEventListener("message",onMessageReceived);
+			document.getElementById("btnSend").addEventListener("click",onBtnSendClick);
+		}
+		function onSocketOpen(){
+			console.log("Socket connection established");
+		}
+		function onSocketClose(){
+			console.log("Socket connection closed");
+		}
+		function onMessageReceived(msgEvt){
+			displayMessage(msgEvt.data);
+		}
+		function displayMessage(msg){
+			document.getElementById("divMessages").innerHTML += msg;
+		}
+		function onBtnSendClick(){
+			var msg = document.getElementById("txtMessage").value;
+			socket.send(msg);
+		}
+	}(window,document,undefined));
+
+	</script>
+</head>
+<body>
+	<span>Message :</span>
+	<input type="text" name="" id="txtMessage">
+	<input type="button" value="Send" id="btnSend">
+	<div id="divMessages"></div>
+</body>
+</html>
