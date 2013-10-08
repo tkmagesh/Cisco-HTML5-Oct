@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" manifest="app.manifest">
+<head>
+	<meta charset="UTF-8">
+	<title>Notes Manager</title>
+	<script src="NotesStorage.js"></script>
+	<script src="NotesManager.js"></script>
+	<script>
+	(function(window){
+
+		var document = window.document;
+		window.applicationCache.addEventListener("updateready",reloadApp);
+		window.addEventListener("DOMContentLoaded",initialize);
+		function initialize(){
+			document.getElementById("btnRefresh").addEventListener("click",onBtnRefreshClick);
+		}
+		function onBtnRefreshClick(){
+			window.location.reload();
+		}
+		function reloadApp(){
+			document.getElementById("divReload").style.display = "block";
+		}
+	}(window,undefined));
+	</script>
+	<link rel="stylesheet" href="NotesManager-Base.css">
+	<link rel="stylesheet" href="NotesManager-Online.css">
+</head>
+<body>
+	<h1>Notes Manager - V2.1</h1>
+	<div id="content">
+	<span>Note :</span>
+	<input type="text" name="" id="txtNote">
+	<input type="button" value="Add Note" id="btnAddNote">
+	<div class="remove">
+	<span>Node Index :</span>
+	<input type="text" name="" id="txtNoteIndex"><input type="button" value="Remove" id="btnRemove">
+	</div>
+	<ul id="ulNotes">
+		
+	</ul>	
+	<div id="divReload">
+		A new version of the application is available.. Do you want to refresh? <input type="button" value="Refresh" id="btnRefresh">
+
+	</div>
+	</div>
+	
+</body>
+</html>

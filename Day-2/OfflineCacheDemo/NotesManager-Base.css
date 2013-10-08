@@ -1,0 +1,15 @@
+body{
+		margin: 0px;
+	}
+	
+	#content{
+		margin-left: 10px;
+		font-size: 28px;
+	}
+	input{
+		font-size: 28px;
+	}
+	
+#divReload {
+	display : none;
+}

@@ -1,0 +1,13 @@
+CACHE MANIFEST
+#VER 2.1
+
+CACHE:
+NotesStorage.js
+NotesManager.js
+NotesManager-Base.css
+
+NETWORK:
+*.*
+
+FALLBACK:
+NotesManager-Online.css	NotesManager-Offline.css
